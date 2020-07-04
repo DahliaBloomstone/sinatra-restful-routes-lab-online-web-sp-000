@@ -15,11 +15,12 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-#new action to display create recipe form 
+#new action to display create recipe form
   get '/recipes/new' do
     erb :new
   end
 
+#create action that creates one recipe 
   post '/recipes' do
     @recipe = Recipe.create(:name => params[:name], :ingredients => params[:ingredients], :cook_time => params[:cook_time])
     redirect to "/recipes/#{@recipe.id}"
