@@ -46,7 +46,7 @@ class ApplicationController < Sinatra::Base
 
 #update action that modfiies an existing recipe based on the ID in the url
 #edit form submission.
-#responds to a PATCH request to the route recipes/:id
+#responds to a PATCH request to the route recipes/:id (patch request in edit.erb)
 #first pull the recipe by the ID from the URL then update the title and content atttributes and saves#
   patch '/recipes/:id' do
     @recipe = Recipe.find_by_id(params[:id])
