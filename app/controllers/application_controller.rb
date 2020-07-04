@@ -26,18 +26,19 @@ class ApplicationController < Sinatra::Base
     redirect to "/recipes/#{@recipe.id}"
   end
 
-#show action that displays edit form based on ID in the url
+#show action that displays one recipe based on the ID in the URL
   get '/recipes/:id' do
     @recipe = Recipe.find_by_id(params[:id])
     erb :show
   end
 
-#edit
+#edit action that displays edit form based on ID in the url
   get '/recipes/:id/edit' do
     @recipe = Recipe.find_by_id(params[:id])
     erb :edit
   end
 
+#update action that modfiies an existing recipe based on the ID in the url
   patch '/recipes/:id' do
     @recipe = Recipe.find_by_id(params[:id])
     @recipe.name = params[:name]
