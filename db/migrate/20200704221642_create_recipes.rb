@@ -8,7 +8,8 @@ class CreateRecipes < ActiveRecord::Migration
   end
 end
 
-
+#create a table in the database to store the recipes
+#recipes have a: name, ingredients, and cook time 
 #rake db:create_migration NAME= create_recipes
 #change file name
-#rake db:migrate 
+#rake db:migrate
