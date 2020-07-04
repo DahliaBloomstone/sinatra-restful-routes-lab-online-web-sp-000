@@ -20,12 +20,13 @@ class ApplicationController < Sinatra::Base
     erb :new
   end
 
-#create action that creates one recipe 
+#create action that creates one recipe
   post '/recipes' do
     @recipe = Recipe.create(:name => params[:name], :ingredients => params[:ingredients], :cook_time => params[:cook_time])
     redirect to "/recipes/#{@recipe.id}"
   end
 
+#edit action that displays edit form based on ID in the url
   get '/recipes/:id' do
     @recipe = Recipe.find_by_id(params[:id])
     erb :show
