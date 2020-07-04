@@ -17,11 +17,14 @@ class ApplicationController < Sinatra::Base
   end
 
 #new action to display create recipe form
+#GET request to load the form to create a new recipe
   get '/recipes/new' do
     erb :new
   end
 
 #create action that creates one recipe
+#responds to a POST request and creates a new article based on the params from the form and saves it to the database.
+#once item is created, action reidrects to the show page. 
   post '/recipes' do
     @recipe = Recipe.create(:name => params[:name], :ingredients => params[:ingredients], :cook_time => params[:cook_time])
     redirect to "/recipes/#{@recipe.id}"
