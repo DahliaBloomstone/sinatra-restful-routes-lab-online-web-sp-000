@@ -20,3 +20,7 @@ ActiveRecord::Schema.define(version: 20200704221642) do
   end
 
 end
+
+#rake db:create_migration NAME= create_recipes
+#change file name
+#rake db:migrate 
