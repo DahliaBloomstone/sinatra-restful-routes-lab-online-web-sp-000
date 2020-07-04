@@ -10,6 +10,7 @@ class ApplicationController < Sinatra::Base
   end
 
 #Index action to display all recipes
+#allows the view to access all the recipes in the database through instance variable recipes.
   get '/recipes' do
     @recipes = Recipe.all
     erb :index
@@ -48,7 +49,7 @@ class ApplicationController < Sinatra::Base
     redirect to "/recipes/#{@recipe.id}"
   end
 
-#deletes one article based on id in the URL 
+#deletes one article based on id in the URL
   delete '/recipes/:id/delete' do
     @recipe = Recipe.find_by_id(params[:id])
     @recipe.delete
