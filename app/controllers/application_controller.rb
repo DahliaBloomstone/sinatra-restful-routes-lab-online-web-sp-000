@@ -9,12 +9,13 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-#Index action to display all recipes 
+#Index action to display all recipes
   get '/recipes' do
     @recipes = Recipe.all
     erb :index
   end
 
+#new action to display create recipe form 
   get '/recipes/new' do
     erb :new
   end
