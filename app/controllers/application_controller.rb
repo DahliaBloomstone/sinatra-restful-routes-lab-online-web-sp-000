@@ -4,14 +4,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  class ApplicationController < Sinatra::Base
-
-    configure do	  configure do
-      set :public_folder, 'public'	    set :public_folder, 'public'
-      set :views, 'app/views'	    set :views, 'app/views'
-    end	  end
-
-    get '/' do	  get '/' do
+    get '/' do
       redirect '/recipes'
     end
 
@@ -63,4 +56,4 @@ class ApplicationController < Sinatra::Base
       redirect '/recipes'
     end
 
-  end 	end 
+  end
