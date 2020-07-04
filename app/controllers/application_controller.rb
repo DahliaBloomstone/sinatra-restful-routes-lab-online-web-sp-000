@@ -4,49 +4,63 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-#displays all the recipes in the database 
-  get '/' do
-    @recipes = Recipe.all
-    erb :index
-  end
+  class ApplicationController < Sinatra::Base
 
-  get '/recipes' do
-    @recipes = Recipe.all
-    erb :index
-  end
+    configure do	  configure do
+      set :public_folder, 'public'	    set :public_folder, 'public'
+      set :views, 'app/views'	    set :views, 'app/views'
+    end	  end
 
-  get '/recipes/new' do
-    erb :new
-  end
+    get '/' do	  get '/' do
+      redirect '/recipes'
+    end
 
-  post '/recipes' do
-    @recipe = Recipe.create(:name => params[:name], :ingredients => params[:ingredients], :cook_time => params[:cook_time])
-    redirect to "/recipes/#{@recipe.id}"
-  end
+    get '/recipes' do
+      @recipes = Recipe.all
+      erb :index	    erb :index
+    end	  end
 
-  get '/recipes/:id' do
-    @recipe = Recipe.find_by_id(params[:id])
-    erb :show
-  end
+    get '/recipes/new' do
+      erb :new
+    end
 
-  get '/recipes/:id/edit' do
-    @recipe = Recipe.find_by_id(params[:id])
-    erb :edit
-  end
+    post '/recipes' do
+      Recipe.new(
+        name: params[:name],
+        ingredients: params[:ingredients],
+        cook_time: params[:cook_time]
+      ).tap do |recipe|
+        recipe.save
+        redirect "/recipes/#{recipe.id}"
+      end
+    end
 
-  patch '/recipes/:id' do
-    @recipe = Recipe.find_by_id(params[:id])
-    @recipe.name = params[:name]
-    @recipe.ingredients = params[:ingredients]
-    @recipe.cook_time = params[:cook_time]
-    @recipe.save
-    redirect to "/recipes/#{@recipe.id}"
-  end
+    get '/recipes/:id' do
+      @recipe = Recipe.find(params[:id])
+      erb :show
+    end
 
-  delete '/recipes/:id/delete' do
-    @recipe = Recipe.find_by_id(params[:id])
-    @recipe.delete
-    redirect to :index
-  end
+    get '/recipes/:id/edit' do
+      @recipe = Recipe.find(params[:id])
+      erb :edit
+    end
 
-end
+    patch '/recipes/:id' do
+      Recipe.find(params[:id]).tap do |recipe|
+        recipe.update(
+          name: params[:name],
+          ingredients: params[:ingredients],
+          cook_time: params[:cook_time]
+        )
+
+        redirect "/recipes/#{recipe.id}"
+
+      end
+    end
+
+    delete '/recipes/:id/delete' do
+      Recipe.find(params[:id]).destroy
+      redirect '/recipes'
+    end
+
+  end 	end 
