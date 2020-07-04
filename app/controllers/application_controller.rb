@@ -31,13 +31,14 @@ class ApplicationController < Sinatra::Base
   end
 
 #show action that displays one recipe based on the ID in the URL
-#uses A DYNAMIC URL. we can access the ID of the recipe in the view through the params hash 
+#uses A DYNAMIC URL. we can access the ID of the recipe in the view through the params hash
   get '/recipes/:id' do
     @recipe = Recipe.find_by_id(params[:id])
     erb :show
   end
 
 #edit action that displays edit form based on ID in the url
+#loads the edit form in the browser 
   get '/recipes/:id/edit' do
     @recipe = Recipe.find_by_id(params[:id])
     erb :edit
