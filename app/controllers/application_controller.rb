@@ -4,6 +4,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
+#displays all the recipes in the database 
   get '/' do
     @recipes = Recipe.all
     erb :index
