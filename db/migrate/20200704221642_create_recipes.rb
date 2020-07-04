@@ -7,3 +7,8 @@ class CreateRecipes < ActiveRecord::Migration
     end
   end
 end
+
+
+#rake db:create_migration NAME= create_recipes
+#change file name
+#rake db:migrate 
